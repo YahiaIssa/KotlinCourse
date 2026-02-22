@@ -1,41 +1,35 @@
 package org.kotlion.unlimted
 
 fun main() {
-    val engineeringAveragingSalari = listOf(8000, 5000, 6000, 7000)
-    print("Salary : ")
-    for (i in engineeringAveragingSalari ) {
+    val sumResult = sum(2, 8,2,2)
+    println("\nsumResult=$sumResult")
+    val largestNumber = findLargestNumber(
+        3,
+        number=  listOf(20, 17, 50, 24, 8, 12) )
+    println("\nlargestNumber from the entered numbers is : $largestNumber")
+}
 
-        print(" [ $i ] ")
+fun sum(firstNumber: Int, secondeNumber: Int,thirdNumber: Int=0,forthNumber:Int=0) = firstNumber + secondeNumber+ thirdNumber+forthNumber
+
+fun sam(vararg numbers: Int) : Int{
+    var sum = 0
+    numbers.forEach {
+        currentNumber ->
+        sum += currentNumber
     }
-    println("  ")
-    for (i in 1..10) {
-        for (j in 1..10) {
-            if (i*j==35) {
-                break
-            }
-            print("${i*j}\t ")
+    return sum
+}
+
+
+fun findLargestNumber( startIndex: Int = 0 ,number: List<Int>): Int {
+    var largestNumber = Int.MIN_VALUE
+    for (i in startIndex until number.size) {
+        if (number[i] > largestNumber) {
+            largestNumber = number[i]
         }
-        println("\n")
-
     }
-//
-//   while (engineeringAveragingSalari.isNotEmpty())
-//   {
-//        println(engineeringAveragingSalari)
-//       engineeringAveragingSalari.removeAt(0)
-//   }
+    return largestNumber
+}
 
 
-//    while ( number>0 ){
-//      number/=2
-//        println("num :  $number")
-//// }
-//    var number:Int=5565
-//    do {
-//        println("number : $number")
-//        number=2
-//    }
-//        while ( number>0 )
-//}
-    }
 
