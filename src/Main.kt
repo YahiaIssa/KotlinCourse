@@ -1,34 +1,25 @@
 package org.kotlion.unlimted
 
 fun main() {
-    val sumResult = sum(2, 8,2,2)
-    println("\nsumResult=$sumResult")
-    val largestNumber = findLargestNumber(
-        3,
-        number=  listOf(20, 17, 50, 24, 8, 12) )
-    println("\nlargestNumber from the entered numbers is : $largestNumber")
+println(FizzBuzz(20))
 }
-
-fun sum(firstNumber: Int, secondeNumber: Int,thirdNumber: Int=0,forthNumber:Int=0) = firstNumber + secondeNumber+ thirdNumber+forthNumber
-
-fun sam(vararg numbers: Int) : Int{
-    var sum = 0
-    numbers.forEach {
-        currentNumber ->
-        sum += currentNumber
+fun FizzBuzz(number:Int): List<String> {
+    val result : MutableList<String> = mutableListOf()
+    for (currentnumber in 1..number) {
+       val solution= calcsingleFizzBuzz(currentnumber)
+   result.add(solution)
     }
-    return sum
+ return result
 }
-
-
-fun findLargestNumber( startIndex: Int = 0 ,number: List<Int>): Int {
-    var largestNumber = Int.MIN_VALUE
-    for (i in startIndex until number.size) {
-        if (number[i] > largestNumber) {
-            largestNumber = number[i]
-        }
+fun calcsingleFizzBuzz(number:Int): String {
+   return when {
+        number % 3 == 0 && number % 5 == 0 -> "Fizz"
+       number %3 ==0-> "Fizz"
+       number % 5 == 0 -> "Buzz"
+       else -> number.toString()
     }
-    return largestNumber
+
+
 }
 
 
