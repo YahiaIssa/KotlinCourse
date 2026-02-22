@@ -1,23 +1,41 @@
 package org.kotlion.unlimted
 
-
 fun main() {
-    val engineerAverageSalary: MutableList<Int> = mutableListOf(2000, 7000, 1000)
-    println(engineerAverageSalary.addAll(1, listOf(1222)))
-    println(engineerAverageSalary)
-    println(engineerAverageSalary.removeAt(1))
-    println(engineerAverageSalary.size)
-    println(engineerAverageSalary.set(1,55))
-    println(engineerAverageSalary)
-//    println(engineerAverageSalary[1])
-//    println(engineerAverageSalary.indexOf(2000))
-//    println(engineerAverageSalary.isEmpty())
-//    println(engineerAverageSalary.first ())
-//    println(engineerAverageSalary.last())
-//    println(engineerAverageSalary.reversed())
-//    println(engineerAverageSalary.firstOrNull())
+    val engineeringAveragingSalari = listOf(8000, 5000, 6000, 7000)
+    print("Salary : ")
+    for (i in engineeringAveragingSalari ) {
+
+        print(" [ $i ] ")
+    }
+    println("  ")
+    for (i in 1..10) {
+        for (j in 1..10) {
+            if (i*j==35) {
+                break
+            }
+            print("${i*j}\t ")
+        }
+        println("\n")
+
+    }
+//
+//   while (engineeringAveragingSalari.isNotEmpty())
+//   {
+//        println(engineeringAveragingSalari)
+//       engineeringAveragingSalari.removeAt(0)
+//   }
 
 
-}
-
+//    while ( number>0 ){
+//      number/=2
+//        println("num :  $number")
+//// }
+//    var number:Int=5565
+//    do {
+//        println("number : $number")
+//        number=2
+//    }
+//        while ( number>0 )
+//}
+    }
 
