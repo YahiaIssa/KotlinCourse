@@ -1,42 +1,53 @@
 package org.kotlion.unlimted
 
 fun main() {
-
     check(
-        name = "when list has even number return correct index",
-        result = getFirstEvenNumberIndex(listOf(1, 2, 3, 4, 5)),
-        correctResult = 1
+        name = "when given a valid simple parentheses string return true",
+        result = isValidParenthese("()"),
+        correctResult = true
     )
 
     check(
-        name = "when list has no even number return -1",
-        result = getFirstEvenNumberIndex(listOf(1, 3, 5, 7)),
-        correctResult = -1
+        name = "when given a valid nested parentheses string return true",
+        result = isValidParenthese("(())"),
+        correctResult = true
     )
 
     check(
-        name = "when list is empty return -1",
-        result = getFirstEvenNumberIndex(emptyList()),
-        correctResult = -1
+        name = "when given a valid complex parentheses string return true",
+        result = isValidParenthese("(()())"),
+        correctResult = true
     )
 
     check(
-        name = "when first element is even return 0",
-        result = getFirstEvenNumberIndex(listOf(1, 2, 5, 7)),
-        correctResult = 0
+        name = "when given unmatched closing parentheses return false",
+        result = isValidParenthese("())"),
+        correctResult = false
+    )
+
+    check(
+        name = "when given unmatched opening parentheses return false",
+        result = isValidParenthese("(()"),
+        correctResult = false
     )
 }
 
-fun getFirstEvenNumberIndex(numbers: List<Int>): Int {
-    for (i in numbers.indices) {
-        if (numbers[i] % 2 == 0) {
-            return i
+fun isValidParenthese(input: String): Boolean {
+    var balance = 0
+    for (ch in input) {
+        when (ch) {
+            '(' -> balance++
+            ')' -> {
+                balance--
+                if (balance < 0) return false
+            }
+            else -> return false
         }
     }
-    return -1
+    return balance == 0
 }
 
-fun check(name: String, result: Int, correctResult: Int) {
+fun check(name: String, result: Boolean, correctResult: Boolean) {
     if (result == correctResult) {
         println("Success - $name")
     } else {
