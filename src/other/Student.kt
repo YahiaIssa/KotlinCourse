@@ -1,4 +1,4 @@
-package org.kotlion.unlimted
+package other
 
 class Student(val name: String,
               val email: String,

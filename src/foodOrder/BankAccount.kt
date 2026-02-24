@@ -1,5 +1,7 @@
-package org.kotlion.unlimted
-import  java.util.UUID
+package foodOrder
+
+import java.util.UUID
+
 class BankAccount(
     val fullname: String) {
 

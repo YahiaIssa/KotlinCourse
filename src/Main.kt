@@ -1,11 +1,23 @@
 package org.kotlion.unlimted
 
+import socialMedia.Reelpost
+import socialMedia.videoPost
+
 fun main() {
-val myBankAccount = BankAccount(fullname = "yahia issa ramadan")
-    myBankAccount.deposit(10000)
-    val iswithdrawSuccess = myBankAccount.withdraw(5000)
-    println("is withdraw success: $iswithdrawSuccess \n the blance after the proccess is : \n ${myBankAccount.getBalance()}")
-    val iswithdrawSuccess2 = myBankAccount.withdraw(5000)
-    println("is withdraw success: $iswithdrawSuccess \n the blance after the proccess is : \n ${myBankAccount.getBalance()}")
+    val Reelpost: Reelpost = Reelpost(
+        publisherName = "ahmad",
+        content = "it was a nice weekend with my friends",
+        hdVideoUrl = "http://some.url",
+        fullHdVideoUrl = "http://some.url"
+    )
+    Reelpost.swipeToNext()
+    Reelpost.like()
+    Reelpost.swipeToNext()
+    println("post likes before: ${Reelpost.likesCount}")
+    Reelpost.like()
+    Reelpost.like()
+    Reelpost.like()
+    println("post likes after: ${Reelpost.likesCount}"
+    )
 }
 

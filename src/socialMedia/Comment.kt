@@ -1,0 +1,4 @@
+package socialMedia
+
+class Comment {
+}
