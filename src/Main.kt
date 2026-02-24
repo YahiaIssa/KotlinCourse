@@ -1,23 +1,24 @@
 package org.kotlion.unlimted
 
-import socialMedia.Reelpost
-import socialMedia.videoPost
+import socialMedia.MediaContent
+import socialMedia.Post
+
 
 fun main() {
-    val Reelpost: Reelpost = Reelpost(
+    val post: Post = Post(
         publisherName = "ahmad",
         content = "it was a nice weekend with my friends",
-        hdVideoUrl = "http://some.url",
-        fullHdVideoUrl = "http://some.url"
+        mediaContent = MediaContent(
+            hdVideoUrl = "http",
+            fullHdVideoUrl = "http",
+        )
     )
-    Reelpost.swipeToNext()
-    Reelpost.like()
-    Reelpost.swipeToNext()
-    println("post likes before: ${Reelpost.likesCount}")
-    Reelpost.like()
-    Reelpost.like()
-    Reelpost.like()
-    println("post likes after: ${Reelpost.likesCount}"
+   post.like()
+    println("post likes before: ${post.likesCount}")
+    post.like()
+    post.like()
+    post.like()
+    println("post likes after: ${post.likesCount}"
     )
 }
 
