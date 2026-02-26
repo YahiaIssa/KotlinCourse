@@ -1,18 +1,11 @@
-package org.kotlion.unlimted
+package org.kotlin.taxiapp.vehicles
 
-import socialMedia.Post
-import javax.print.attribute.standard.JobStateReason
+import taxiapp.vehicles.Database
 
 
 fun main() {
-   val welcomeMassage: String="hello world"
-  println(welcomeMassage.something)
-    String.space
+    val database = Database.connect()
+    val database2 = Database.getInstance()
+
+
 }
-fun String.getWordsCount(): Int {
-    return this.trim().split(String.space).size
-}
- val String.something: Int
-     get()=this.length/2
-val String.Companion.space: String
-get() = ""
