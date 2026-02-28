@@ -1,50 +1,70 @@
-//package org.kotlion.unlimted.trip
-//import org.kotlion.unlimted.payment.method.calculator.CostCalculator
-//import taxiapp.payment.method.method.PaymentMethod
-//import java.util.logging.Logger
-//
-//
-//class Trip(
-//    private val paymentMethod: PaymentMethod,
-//    private val costCalculitar: CostCalculator,
-//    private val logger: Logger
-//) : logger by Logger {
-//    private var distance: Int = 0
-//    private var tripStatus: TripStatus = TripStatus.USER_ORERED_TAXI
-//
-//    fun advanceOneKM() {
-//        if (tripStatus == TripStatus.TRIP_STARTED) {
-//            distance++
-//            println("Advanced 1 km")
-//        } else {
-//            println("Can't advanced while the Status is ${tripStatus} ")
-//        }
-//    }
-//
-//    fun startTrip() {
-//        tripStatus = TripStatus.TRIP_STARTED
-//        println("trip started")
-//    }
-//
-//    fun endTrip() {
-//        val tripCost: Int = costCalculitar.calculateTripCost(distance)
-//        paymentMethod.processPayment(tripCost)
-//        tripStatus = TripStatus.TRIP_ENDED
-//        println("trip ended after $distance Km")
-//
-//    }
-//    private fun calculateTripCost(): Int {
-//        return CostCalculator.calculateTripCost(distance)
-//
-//    }
-//
-//    enum class TripStatus {
-//        USER_ORERED_TAXI,
-//        DRIVER_ACCEPT_TRIP,
-//        TAXI_ARRIVED_START_POINT,
-//        TRIP_STARTED,
-//        TRIP_ENDED,
-//        TRIP_CANCELED,
-//
-//    }
-//}
+package org.kotlion.unlimted.trip
+
+import com.sun.beans.introspect.PropertyInfo
+
+
+interface Trip {
+    fun getDescription(): String
+    fun getCost(): Int
+
+}
+
+class BasicTrip : Trip {
+    private val description: String = "Simple taxi trip"
+    private val cost: Int = 5000
+    override fun getDescription(): String {
+        return description
+    }
+
+    override fun getCost(): Int {
+        return cost
+    }
+}
+
+abstract class TripDecorator(private val trip: Trip) : Trip {
+    override fun getCost(): Int {
+        return trip.getCost()
+    }
+
+    override fun getDescription(): String {
+        return trip.getDescription()
+    }
+}
+    class WifiDecorator(private val trip: Trip) : TripDecorator(trip) {
+        override fun getCost(): Int {
+            return super.getCost() + 1000
+        }
+
+        override fun getDescription(): String {
+            return super.getDescription() + ",with wifi"
+        }
+    }
+
+    class ChiledSeatDecorator(trip: Trip) : TripDecorator(trip) {
+        override fun getDescription(): String {
+            return super.getDescription() + ",With chiled seat"
+        }
+
+        override fun getCost(): Int {
+            return super.getCost() + 2000
+        }
+    }
+
+    class MusicDecorator(trip: Trip) : TripDecorator(trip) {
+        override fun getDescription(): String {
+            return super.getDescription() + "With music"
+        }
+
+        override fun getCost(): Int {
+            return super.getCost() + 1500
+        }
+    }
+class FoodDecorator(trip: Trip) : TripDecorator(trip) {
+    override fun getDescription(): String {
+        return super.getDescription() + "With Food"
+    }
+
+    override fun getCost(): Int {
+        return super.getCost() + 2000
+    }
+}

@@ -1,22 +1,19 @@
 package org.kotlin.taxiapp.vehicles
 
-import taxiapp.locaitionTracker.HomeScreenObserver
-
-import taxiapp.locaitionTracker.NotificationScreenObserver
-import taxiapp.locaitionTracker.TripScreenObserver
-import taxiapp.locaitionTracker.Observer
+import org.kotlion.unlimted.trip.BasicTrip
+import org.kotlion.unlimted.trip.FoodDecorator
+import org.kotlion.unlimted.trip.MusicDecorator
+import org.kotlion.unlimted.trip.Trip
+import org.kotlion.unlimted.trip.TripDecorator
+import org.kotlion.unlimted.trip.WifiDecorator
 
 
 fun main() {
 
-    val driverlocationObservable = Observable<String>()
-    val homeScreenObserver : Observer<String> = HomeScreenObserver()
-    val tripScreenObserver : Observer<String>  = TripScreenObserver()
-    val notificationScreenObserver :Observer<String>= NotificationScreenObserver()
-    driverlocationObservable.subscribe(homeScreenObserver)
-    driverlocationObservable.subscribe(tripScreenObserver)
-    driverlocationObservable.subscribe(notificationScreenObserver)
-    driverlocationObservable.notifyObservars("60M Street")
-
-
+    val trip: Trip = BasicTrip()
+    val tripWithWifi = WifiDecorator(trip)
+    val tripWithmusicAndWifi= MusicDecorator(tripWithWifi)
+    val tripWithmusicAndWifiAndFood= FoodDecorator(tripWithmusicAndWifi)
+ println("The trip is ${tripWithmusicAndWifiAndFood.getDescription()}Cost you ${tripWithmusicAndWifiAndFood.getCost()}")
 }
+
