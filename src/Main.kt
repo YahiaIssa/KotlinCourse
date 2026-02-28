@@ -9,11 +9,11 @@ import org.kotlion.unlimted.trip.WifiDecorator
 
 
 fun main() {
+    val input=1
 
-    val trip: Trip = BasicTrip()
-    val tripWithWifi = WifiDecorator(trip)
-    val tripWithmusicAndWifi= MusicDecorator(tripWithWifi)
-    val tripWithmusicAndWifiAndFood= FoodDecorator(tripWithmusicAndWifi)
- println("The trip is ${tripWithmusicAndWifiAndFood.getDescription()}Cost you ${tripWithmusicAndWifiAndFood.getCost()}")
+    println("factorial ($input) = ${factorial(input)}")
+}
+fun factorial(input: Int): Long {
+    return if (input==1) 1 else input * factorial(input-1)
 }
 
