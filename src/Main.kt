@@ -1,31 +1,26 @@
-package org.kotlin.taxiapp.vehicles
-
+package org.kotlion.unlimted
+import Product
 import jdk.dynalink.Operation
 import java.io.DataInput
 
 fun main() {
-    val todayTemperaterPerHours: List<Int> =
-        listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
-    val happyNumber: List<String> = listOf("One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"
-        ,"Ten ","One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"
-        ,"Ten")
+    val number : List<Int> = listOf(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20)
+    val smartPhone :Product=Product("Smartphone").apply {
+        price=11.5
+        category="Electronic"
+    }
+number.sorted()
+    .also {println(it)}
+    .filter (::isEven)
+    .also{println{it}}
 
-    val foodCategory: List<Set<String>> = listOf(
-        setOf("Apple", "Banana", "Orange", "Pear"),
-        setOf("Carrot", "Broccli", "Spinach"),
-        setOf("Chicken", "Beef", "Fish")
-    )
+    with(smartPhone){
 
-    println(
-        todayTemperaterPerHours.zip(happyNumber)
-    )
-//    println(
-//        foodCategory.flatten()
-//    )
-//    println()
-//    todayTemperaterPerHours.map (::finedDublicate )
-//}
-//fun finedDublicate(input: Int): Int{
-//    return input*2
+println(this.name)
+
+"hello world"
+    }
 }
+fun isEven(input: Int)= (input % 2).isZero()
 
+fun Int.isZero() = this == 0
