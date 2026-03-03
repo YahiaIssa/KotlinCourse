@@ -1,17 +1,19 @@
-package org.kotlion.unlimted
+data class User(val username: String) {
+    private var age: Int = 0
 
-data class User (
-    val username: String,
-    val email: String,
-):Comparable<User>{
-    override fun compareTo(other: User): Int {
-       return if (this.username == other.username) {
-           0
-       }else if (this.username>=other.username){
-           1
-       }else {
-           -1
-       }
+    fun setAge(newage: Int) {
+        if (newage >= MUNIMUM_ALLOWED_AGE) {
+            age = newage
+        } else {
+            throw Exception("age not allowed,minimum age is $MUNIMUM_ALLOWED_AGE")
+        }
+    }
+
+    override fun toString(): String {
+        return "(user name =$username ,age =$age)"
+    }
+
+    companion object {
+        const val MUNIMUM_ALLOWED_AGE = 12
     }
 }
-
