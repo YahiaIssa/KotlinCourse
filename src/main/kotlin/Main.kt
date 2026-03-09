@@ -1,16 +1,47 @@
 package org.example
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
-    val name = "Kotlin"
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    println("Hello, " + name + "!")
-
-    for (i in 1..5) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        println("i = $i")
+    val customScope = CoroutineScope(Dispatchers.Default)
+    customScope.launch {
+       var result=1
+        for (i in 1..10) {
+            result *=i
+            println("Result updated $result using thread ${Thread.currentThread().name}")
+            delay(1000)
+        }
+        withContext(Dispatchers.IO) {
+            println("Saving to storage ,using thread ${Thread.currentThread().name}")
+        }
+    }
+  customScope.launch {
+      waitFingerScan()
+  }
+    customScope.launch {
+        waitUserrIntraction()
+    }
+    runBlocking {
+        delay(20000)
     }
 }
+suspend fun waitFingerScan(){
+    for (i in 1..8) {
+        println("waiting finger $i ${Thread.currentThread().name}")
+        delay(1000L)
+    }
+}
+suspend fun waitUserrIntraction(){
+    for (i in 1..8) {
+        println("waiting user interaction $i ${Thread.currentThread().name}")
+        delay(1000L)
+    }
+    }
