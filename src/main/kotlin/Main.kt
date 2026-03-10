@@ -1,72 +1,60 @@
 package org.example
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
-val searchScreenScope= CoroutineScope(Dispatchers.Default)
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+
+@OptIn(DelicateCoroutinesApi::class)//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
-    search("Freedom")
-    runBlocking {
-        delay(3000)
-        search("kabab")
-        delay(20000)
-    }
-}
-    var searchJob: Job? = null
-    fun search(term: String) {
-        searchJob?.cancel()
-        var searchJob=searchScreenScope.launch {
 
-            for (i in 1.. 10){
-                println("trying to search for $term iteration $i")
-                delay(1000)
-            }
+    val hotFlow: MutableStateFlow<Int> = MutableStateFlow(5)
+    GlobalScope.launch {
+        hotFlow.filter {
+            it % 2 == 0
+        }.collect {
+            println(" new value emitted: $it")
         }
     }
-fun screenClosed(){
-    searchScreenScope.cancel()
-}
+
+    runBlocking {
+        hotFlow.emit(3)
+        delay(2000)
+        hotFlow.emit(6)
+        delay(2000)
+        hotFlow.emit(8)
+        delay(100)
+        hotFlow.emit(12)
+        delay(2000)
+        hotFlow.emit(17)
+        delay(100)
+        hotFlow.emit(20)
+        delay(5000)
+        hotFlow.emit(23)
+        delay(1000)
+        hotFlow.emit(28)
+        delay(100000)
+
+    }
 
 
-//
-//    val customScope = CoroutineScope(Dispatchers.Default)
-//    customScope.launch {
-//       var result=1
-//        for (i in 1..10) {
-//            result *=i
-//            println("Result updated $result using thread ${Thread.currentThread().name}")
-//            delay(1000)
-//        }
-//        withContext(Dispatchers.IO) {
-//            println("Saving to storage ,using thread ${Thread.currentThread().name}")
-//        }
-//    }
-//  customScope.launch {
-//      waitFingerScan()
-//  }
-//    customScope.launch {
-//        waitUserrIntraction()
+
+//    val x= flow <Int>{
+//        emit(10)
+//        delay(2000)
+//        emit(20)
+//        delay(2000)
+//        emit(30)
 //    }
 //    runBlocking {
-//        delay(20000)
+//        x.collect {
+//            println(it)
+//
+//        }
 //    }
-//}
-//suspend fun waitFingerScan(){
-//    for (i in 1..8) {
-//        println("waiting finger $i ${Thread.currentThread().name}")
-//        delay(1000L)
-//    }
-//}
-//suspend fun waitUserrIntraction(){
-//    for (i in 1..8) {
-//        println("waiting user interaction $i ${Thread.currentThread().name}")
-//        delay(1000L)
-//    }
+
+}
