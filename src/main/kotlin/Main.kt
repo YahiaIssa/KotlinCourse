@@ -1,60 +1,46 @@
 package org.example
 
 import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-@OptIn(DelicateCoroutinesApi::class)//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
-
-    val hotFlow: MutableStateFlow<Int> = MutableStateFlow(5)
-    GlobalScope.launch {
-        hotFlow.filter {
-            it % 2 == 0
-        }.collect {
-            println(" new value emitted: $it")
-        }
-    }
-
+    startSearchListener()
     runBlocking {
-        hotFlow.emit(3)
         delay(2000)
-        hotFlow.emit(6)
-        delay(2000)
-        hotFlow.emit(8)
+        search("A")
         delay(100)
-        hotFlow.emit(12)
-        delay(2000)
-        hotFlow.emit(17)
-        delay(100)
-        hotFlow.emit(20)
-        delay(5000)
-        hotFlow.emit(23)
-        delay(1000)
-        hotFlow.emit(28)
-        delay(100000)
+        search("Ap")
+        delay(60)
+        search("App")
+        delay(120)
+        search("Appl")
+        delay(600)
+        search("Apple")
 
+        delay(10000)
     }
 
+}
+val searchFlow: MutableStateFlow<String> = MutableStateFlow(" ")
+suspend fun search(keyword:String){
+searchFlow.emit(keyword)
+}
+@OptIn(DelicateCoroutinesApi::class, FlowPreview::class)
+fun startSearchListener(){
+    GlobalScope.launch {
+        searchFlow.filter (String::isNotBlank)
+            .debounce(500)
+            .collect (::query)
+        } }
 
 
-//    val x= flow <Int>{
-//        emit(10)
-//        delay(2000)
-//        emit(20)
-//        delay(2000)
-//        emit(30)
-//    }
-//    runBlocking {
-//        x.collect {
-//            println(it)
-//
-//        }
-//    }
-
+fun query(input: String){
+    println("searching about : $input")
 }
